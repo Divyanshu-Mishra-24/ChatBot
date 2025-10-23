@@ -36,3 +36,39 @@ It features a **modular architecture** with a Python-based backend and a React.j
 ---
 
 ## 🧩 Project Structure  
+```text
+
+AI ChatBot/
+├── backend/
+│ ├── app.py
+│ ├── config.py
+│ ├── main.py
+│ └── requirement.txt
+│
+├── frontend/
+│ ├── public/
+│ │ ├── index.html
+│ │ ├── favicon.ico
+│ │ └── manifest.json
+│ │
+│ ├── src/
+│ │ ├── components/
+│ │ │ ├── ChatWindow.jsx
+│ │ │ ├── MessageInput.jsx
+│ │ │ └── Navbar.jsx
+│ │ │
+│ │ ├── assets/
+│ │ │ └── logo.png
+│ │ │
+│ │ ├── App.jsx
+│ │ ├── index.jsx
+│ │ └── styles/
+│ │ └── chat.css
+│ │
+│ ├── package.json
+│ ├── package-lock.json
+│ └── README.md
+│
+├── .gitignore
+└── README.md
+```
