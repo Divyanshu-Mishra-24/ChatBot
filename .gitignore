@@ -1,0 +1,66 @@
+# ================================
+# Node (React frontend)
+# ================================
+frontend/node_modules/
+frontend/build/
+frontend/.env
+frontend/.DS_Store
+frontend/npm-debug.log*
+frontend/yarn-debug.log*
+frontend/yarn-error.log*
+frontend/.parcel-cache
+frontend/.eslintcache
+
+# ================================
+# Python (Backend)
+# ================================
+backend/__pycache__/
+backend/venv/
+backend/*.pyc
+backend/*.pyo
+backend/*.pyd
+backend/.Python
+backend/env/
+backend/.venv/
+backend/.env
+backend/.DS_Store
+backend/*.log
+backend/.mypy_cache/
+backend/.pytest_cache/
+backend/.coverage
+backend/instance/
+backend/*.db
+backend/*.sqlite3
+backend/config.py
+
+# Ignore AI response text files
+backend/AI_Responses/*.txt
+
+# ================================
+# System / Editor Files
+# ================================
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*.bak
+*.tmp
+*.log
+
+# ================================
+# VS Code Settings
+# ================================
+.vscode/
+.history/
+
+# ================================
+# Root Level Node Files
+# ================================
+node_modules/
+package-lock.json
+
+# ================================
+# Environment / Secrets
+# ================================
+.env
+config.py  # contains your API keys

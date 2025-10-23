@@ -1,0 +1,7 @@
+Flask==2.3.3
+Flask-Cors==4.0.0
+requests==2.31.0
+pyttsx3==2.90
+SpeechRecognition==3.10.0
+pyaudio==0.2.13
+python-vlc==3.0.18121

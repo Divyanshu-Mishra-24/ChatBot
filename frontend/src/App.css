@@ -1,0 +1,437 @@
+:root {
+  --primary-color: #6a11cb; /* Deeper purple */
+  --secondary-color: #2575fc; /* Vibrant blue */
+  --accent-color: #00f2fe; /* Electric blue/cyan */
+  --background-color: #121212; /* Darker background */
+  --text-color: #e0e0e0; /* Lighter text */
+  --terminal-bg: #1e1e1e; /* Slightly lighter terminal background */
+  --command-color: #a7ffeb; /* Light aqua for commands */
+  --response-color: #c8e6c9; /* Soft green for responses */
+  --error-color: #ef5350; /* Brighter red for errors */
+  --border-color: rgba(255, 255, 255, 0.1); /* Subtle border color */
+  --input-bg: rgba(255, 255, 255, 0.08); /* Input background */
+  --button-hover-bg: linear-gradient(45deg, #2575fc, #6a11cb); /* Gradient hover for buttons */
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Fira Code', 'Courier New', monospace; /* Modern monospace font */
+  background: linear-gradient(135deg, var(--background-color) 0%, #0a0a0a 100%); /* Gradient background */
+  color: var(--text-color);
+  line-height: 1.6;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.app {
+  max-width: 900px;
+  width: 95%; /* Slightly wider on smaller screens */
+  margin: 20px auto;
+  padding: 25px;
+  min-height: 85vh; /* Adjusted min-height */
+  display: flex;
+  flex-direction: column;
+  background-color: rgba(30, 30, 30, 0.95); /* Semi-transparent dark background */
+  border-radius: 12px; /* More rounded corners */
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); /* Stronger shadow */
+  border: 1px solid var(--border-color); /* Subtle border */
+}
+
+.app.chat-mode {
+  --command-color: #ffcc80; /* Softer orange for chat mode commands */
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px; /* Increased margin */
+  padding-bottom: 15px; /* Increased padding */
+  border-bottom: 1px solid var(--border-color); /* Subtle border */
+}
+
+h1 {
+  color: var(--accent-color);
+  display: flex;
+  align-items: center;
+  gap: 12px; /* Increased gap */
+  font-size: 2.2rem; /* Larger heading */
+  text-shadow: 0 0 8px rgba(0, 242, 254, 0.4); /* Glow effect */
+}
+
+.history-button {
+  background: none;
+  border: none;
+  color: var(--text-color);
+  font-size: 1.8rem; /* Larger icon */
+  cursor: pointer;
+  transition: color 0.3s ease, transform 0.2s ease; /* Smooth transition */
+}
+
+.history-button:hover {
+  color: var(--accent-color);
+  transform: scale(1.1); /* Slight scale on hover */
+}
+
+.terminal-container {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--terminal-bg);
+  border-radius: 8px; /* Slightly more rounded */
+  padding: 20px; /* Increased padding */
+  box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.4); /* Inner shadow for depth */
+  border: 1px solid var(--border-color);
+  overflow: hidden; /* Ensure content stays within bounds */
+}
+
+.command-input {
+  margin-top: auto;
+  padding-top: 20px; /* Space above input */
+}
+
+.input-group {
+  display: flex;
+  margin-bottom: 15px; /* Increased margin */
+  border-radius: 6px; /* Rounded input group */
+  overflow: hidden; /* Ensures inner elements respect border-radius */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3); /* Shadow for input group */
+}
+
+.input-group input {
+  flex-grow: 1;
+  padding: 12px 18px; /* Increased padding */
+  background-color: var(--input-bg);
+  border: 1px solid var(--border-color); /* Subtle border */
+  border-right: none; /* Remove right border for seamless look */
+  color: var(--text-color);
+  font-family: 'Fira Code', monospace;
+  font-size: 1rem;
+  transition: border-color 0.3s ease, background-color 0.3s ease;
+}
+
+.input-group input:focus {
+  outline: none;
+  border-color: var(--accent-color);
+  background-color: rgba(255, 255, 255, 0.12); /* Slightly lighter on focus */
+}
+
+.button-group {
+  display: flex;
+}
+
+.button-group button {
+  padding: 12px 20px; /* Increased padding */
+  background: linear-gradient(45deg, var(--primary-color), var(--secondary-color)); /* Gradient background */
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 1.1rem; /* Larger icons */
+  transition: background 0.3s ease, transform 0.2s ease; /* Smooth transition */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.button-group button:hover {
+  background: var(--button-hover-bg); /* Gradient hover */
+  transform: translateY(-2px); /* Slight lift effect */
+}
+
+.button-group button:active {
+  transform: translateY(0); /* Reset on click */
+}
+
+.button-group button:first-child {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.button-group button:last-child {
+  border-top-right-radius: 6px;
+  border-bottom-right-radius: 6px;
+}
+
+.mic-button.listening {
+  background: var(--error-color); /* Solid red for listening */
+  box-shadow: 0 0 15px var(--error-color); /* Glow effect */
+}
+
+.hint {
+  font-size: 0.85rem; /* Slightly larger hint */
+  color: rgba(255, 255, 255, 0.5); /* Softer hint color */
+  margin-top: 8px; /* Increased margin */
+  text-align: center;
+}
+
+.terminal-output {
+  flex-grow: 1;
+  overflow-y: auto;
+  margin-bottom: 20px;
+  max-height: 60vh; /* Keep max height */
+  padding: 15px; /* Increased padding */
+  background-color: rgba(0, 0, 0, 0.15); /* Slightly transparent overlay */
+  border-radius: 6px; /* Rounded corners */
+  border: 1px solid rgba(255, 255, 255, 0.05); /* Very subtle border */
+  scrollbar-width: thin; /* For Firefox */
+  scrollbar-color: var(--secondary-color) var(--terminal-bg); /* For Firefox */
+}
+
+/* Custom scrollbar for Webkit browsers */
+.terminal-output::-webkit-scrollbar {
+  width: 8px;
+}
+
+.terminal-output::-webkit-scrollbar-track {
+  background: var(--terminal-bg);
+  border-radius: 10px;
+}
+
+.terminal-output::-webkit-scrollbar-thumb {
+  background-color: var(--secondary-color);
+  border-radius: 10px;
+  border: 2px solid var(--terminal-bg);
+}
+
+.command-block {
+  margin-bottom: 18px; /* Increased spacing between blocks */
+  padding-bottom: 10px;
+  border-bottom: 1px dashed rgba(255, 255, 255, 0.05); /* Dashed separator */
+}
+
+.command-block:last-child {
+  border-bottom: none; /* No border for the last item */
+}
+
+.user-command {
+  color: var(--command-color);
+  margin-bottom: 8px; /* Increased margin */
+  font-weight: bold;
+  display: flex;
+  align-items: baseline;
+}
+
+.gruu-response {
+  color: var(--response-color);
+  white-space: pre-wrap;
+  font-style: italic;
+  display: flex;
+  align-items: baseline;
+}
+
+.prompt, .gruu-prompt {
+  color: var(--accent-color);
+  font-weight: bold;
+  margin-right: 8px; /* Space after prompt */
+  text-shadow: 0 0 5px rgba(0, 242, 254, 0.2); /* Subtle glow */
+}
+
+/* History Modal Styles */
+.history-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.9); /* Darker, more opaque overlay */
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  padding: 30px; /* Increased padding */
+  backdrop-filter: blur(8px); /* Frosted glass effect */
+}
+
+.history-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.history-header h3 {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--accent-color);
+  font-size: 1.8rem;
+}
+
+.close-button {
+  background: none;
+  border: none;
+  color: var(--text-color);
+  font-size: 1.8rem;
+  cursor: pointer;
+  transition: color 0.3s ease, transform 0.2s ease;
+}
+
+.close-button:hover {
+  color: var(--error-color); /* Red on hover for close */
+  transform: rotate(90deg); /* Rotate effect */
+}
+
+.history-content {
+  flex-grow: 1;
+  overflow-y: auto;
+  background-color: var(--terminal-bg);
+  padding: 25px;
+  border-radius: 8px;
+  box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.4);
+  border: 1px solid var(--border-color);
+  scrollbar-width: thin;
+  scrollbar-color: var(--secondary-color) var(--terminal-bg);
+}
+
+.history-content::-webkit-scrollbar {
+  width: 8px;
+}
+
+.history-content::-webkit-scrollbar-track {
+  background: var(--terminal-bg);
+  border-radius: 10px;
+}
+
+.history-content::-webkit-scrollbar-thumb {
+  background-color: var(--secondary-color);
+  border-radius: 10px;
+  border: 2px solid var(--terminal-bg);
+}
+
+.history-content ul {
+  list-style: none;
+}
+
+.history-content li {
+  margin-bottom: 25px; /* Increased spacing */
+  padding-bottom: 15px;
+  border-bottom: 1px dashed rgba(255, 255, 255, 0.08); /* Subtle dashed separator */
+}
+
+.history-content li:last-child {
+  border-bottom: none;
+}
+
+.history-timestamp {
+  font-size: 0.9rem; /* Slightly larger timestamp */
+  color: rgba(255, 255, 255, 0.4); /* Softer timestamp color */
+  margin-bottom: 8px;
+}
+
+.history-command {
+  color: var(--command-color);
+  margin-bottom: 8px;
+  font-weight: bold;
+}
+
+.history-response {
+  color: var(--response-color);
+  white-space: pre-wrap;
+  font-style: italic;
+}
+
+.loading, .empty {
+  text-align: center;
+  padding: 30px;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 1.1rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .app {
+    padding: 15px;
+    width: 100%;
+    margin: 0;
+    border-radius: 0;
+    min-height: 100vh;
+  }
+  
+  header {
+    flex-direction: column;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  h1 {
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+  }
+
+  .history-button {
+    font-size: 1.6rem;
+  }
+
+  .terminal-container {
+    padding: 15px;
+  }
+
+  .input-group input {
+    padding: 10px 12px;
+    font-size: 0.9rem;
+  }
+
+  .button-group button {
+    padding: 10px 15px;
+    font-size: 1rem;
+  }
+
+  .hint {
+    font-size: 0.8rem;
+  }
+
+  .history-modal {
+    padding: 15px;
+  }
+
+  .history-header h3 {
+    font-size: 1.5rem;
+  }
+
+  .close-button {
+    font-size: 1.6rem;
+  }
+
+  .history-content {
+    padding: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  h1 {
+    font-size: 1.5rem;
+  }
+
+  .input-group {
+    flex-direction: column;
+  }
+
+  .input-group input {
+    border-radius: 6px;
+    border-right: 1px solid var(--border-color);
+    margin-bottom: 10px;
+  }
+
+  .button-group {
+    width: 100%;
+    justify-content: stretch;
+  }
+
+  .button-group button {
+    flex: 1;
+    border-radius: 6px;
+  }
+
+  .button-group button:first-child,
+  .button-group button:last-child {
+    border-radius: 6px;
+  }
+}
