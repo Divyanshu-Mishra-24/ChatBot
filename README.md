@@ -45,30 +45,28 @@ AI ChatBot/
 │ ├── main.py
 │ └── requirement.txt
 │
-├── frontend/
-│ ├── public/
-│ │ ├── index.html
-│ │ ├── favicon.ico
-│ │ └── manifest.json
+frontend/
+├── node_modules/
+│
+├── public/
+│ ├── index.html
+│ └── favicon.ico
+│
+├── src/
+│ ├── components/
+│ │ └── (All React Components)
 │ │
-│ ├── src/
-│ │ ├── components/
-│ │ │ ├── ChatWindow.jsx
-│ │ │ ├── MessageInput.jsx
-│ │ │ └── Navbar.jsx
-│ │ │
-│ │ ├── assets/
-│ │ │ └── logo.png
-│ │ │
-│ │ ├── App.jsx
-│ │ ├── index.jsx
-│ │ └── styles/
-│ │ └── chat.css
-│ │
-│ ├── package.json
-│ ├── package-lock.json
-│ └── README.md
+│ ├── App.css
+│ ├── App.js
+│ ├── App.test.js
+│ ├── index.css
+│ ├── index.js
+│ ├── logo.svg
+│ ├── reportWebVitals.js
+│ ├── setupTests.js
+│ └── speech-recognition.js
 │
 ├── .gitignore
+├── package-lock.json
+├── package.json
 └── README.md
-```
